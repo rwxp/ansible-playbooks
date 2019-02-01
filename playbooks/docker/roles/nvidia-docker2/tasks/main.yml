@@ -1,0 +1,22 @@
+- name: Add an Apt signing key, uses whichever key is at the URL
+  apt_key:
+    url: https://nvidia.github.io/nvidia-docker/gpgkey
+    state: present
+
+- name: Download nvidia-docker source list
+  get_url: 
+    url: https://nvidia.github.io/nvidia-docker/ubuntu18.04/nvidia-docker.list
+    dest: /etc/apt/sources.list.d/
+
+- name: Update ubuntu
+  apt: update_cache=yes
+
+- name: Install required packages (please, be pacient ...)
+  apt:
+    pkg:
+     - nvidia-docker2=2.0.3+docker18.06.1-1
+     - nvidia-container-runtime=2.0.0+docker18.06.1-1
+    state: present
+
+- name: Reboot and wait for reboot to complete
+  reboot:

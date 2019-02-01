@@ -1,0 +1,11 @@
+---
+- name: Setting up nodes with docker
+  hosts: 
+    - L
+  user: clouduser
+  become: true
+  roles: 
+    - docker.io
+    - nvidia-docker2
+  vars:
+    user: clouduser
