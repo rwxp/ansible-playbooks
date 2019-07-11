@@ -9,7 +9,7 @@ This repo includes ansible playbooks to automate the provisioning of several mac
  - singularity 
  - gromacs 2018
 
-## About Ansible
+### About Ansible
 
 Ansible is an **Agentless** Configuration Management Tool commonly used to automate three types of tasks: Provisioning, Configuration Manangement and Application Deployment. Ansible considers to kind of machines:
 
@@ -18,9 +18,9 @@ Ansible is an **Agentless** Configuration Management Tool commonly used to autom
 
 Passwordless is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require python to be installed.
 
-## Lets Play with the Playbooks
+### Lets Play with the Playbooks
 
-* Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here]().
+* Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here](https://github.com/DonAurelio/vagrant).
 * Install Ansible in your PC (It will be the Control Machine)
 
 ```sh
