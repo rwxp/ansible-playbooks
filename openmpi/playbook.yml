@@ -1,20 +1,21 @@
 ---
 - name: Setting up master node
   hosts:
-    - A
-  user: vagrant
+    - m
+  user: clouduser
   become: true
   roles: 
     - basic
-    - master
+#     - master
 
-- name: Setting up slave nodes
-  hosts: 
-    - B
-    - C
-    - D
-  user: vagrant
-  become: true
-  roles: 
-    - basic
-    - slave
+# - name: Setting up slave nodes
+#   hosts: 
+#     - n
+#     - o
+#     - p
+#     - k 
+#   user: clouduser
+#   become: true
+#   roles: 
+#     - basic
+#     - slave

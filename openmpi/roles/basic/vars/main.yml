@@ -3,6 +3,9 @@ mpi_inst_dir: /opt/openmpi-3.1.2
 mpi_test_dir: /tmp/openmpi-test
 mpi_user_name: mpiuser
 mpi_hosts:
-  - { name: A, ip: 10.0.0.2 }
-  - { name: B, ip: 10.0.0.3 }
+  - { name: m, ip: 157.253.205.92 }
+  - { name: n, ip: 157.253.205.59 }
+  - { name: o, ip: 157.253.205.102 }
+  - { name: p, ip: 157.253.205.58 }
+  - { name: k, ip: 157.253.205.79 }
 
