@@ -19,12 +19,11 @@ Passwordless is required between a Control Machine and Machines Under Configurat
 
 ## Lets Play with the Playbooks
 
-1. Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here]().
+1. Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here](https://github.com/DonAurelio/vagrant/tree/master/cluster).
 2. Install Ansible in your PC (It will be the Control Machine)
 
 ```sh
 sudo apt-get update
-sudo apt-get upgrade -y
 sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get install ansible -y
 sudo apt-get install python -y
@@ -55,7 +54,7 @@ ansible -m ping vagrant_cluster
 
 # Todo
 
-- [] Steps to configure a real cluster passwordless.
+- [ ] Steps to configure a real cluster passwordless.
 
 # References
 

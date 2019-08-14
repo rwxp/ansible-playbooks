@@ -9,11 +9,11 @@ This playbook includes:
 
 Some requirements for OpenMPI 3.1.2
 
-* Hostnames can be written whit _ beacuse it cause erros when parsing hostnames like "slave_1". 
+* Hostnames can't be written with ```_``` (underscore) beacuse it cause erros when parsing hostnames like "slave_1".
 
 ## Run
 
-We use the connection module *paramiko* because *smart* fails somethimes. To run in vagrant machines use:
+For this example, we user a cluster of vagrant machines. Additionally, we consider the connection module *paramiko* because *smart* fails somethimes.
 
 ```sh
 ansible-playbook playbook.yml -c paramiko 
@@ -27,7 +27,10 @@ ansible-playbook playbook.yml -K -c paramiko
 
 ## Todo
 
-* SSH keys needs to be more secure.
+* How to set ssh keys in computer under control
+* Restart NFS before install
+* Restart NFS clients before mount
+* Add indications of the variables to be configured to run this script properly
 
 
 ## Issues
