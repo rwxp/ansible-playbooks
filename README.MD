@@ -2,12 +2,14 @@
 
 This repo includes ansible playbooks to automate the provisioning of several machines with a single command. We provide a list of available playbooks as follows:
 
-* Ubuntu 18.04 LTS
+**Ubuntu 18.04 LTS**
  - cuda 10 (nvidia-driver-410,nvidia-driver-390,cuda)
  - docker (docker.io,nvidia-docker2)
  - openmpi 3.1.2 (NFS, passwordless, openmpi)
  - singularity 
  - gromacs 2018
+
+### About Ansible
 
 Ansible is an **Agentless** Configuration Management Tool commonly used to automate three types of tasks: Provisioning, Configuration Manangement and Application Deployment. Ansible considers to kind of machines:
 
@@ -16,11 +18,10 @@ Ansible is an **Agentless** Configuration Management Tool commonly used to autom
 
 Passwordless is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require python to be installed.
 
+### Lets Play with the Playbooks
 
-## Lets Play with the Playbooks
-
-1. Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here](https://github.com/DonAurelio/vagrant/tree/master/cluster).
-2. Install Ansible in your PC (It will be the Control Machine)
+* Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here](https://github.com/DonAurelio/vagrant).
+* Install Ansible in your PC (It will be the Control Machine)
 
 ```sh
 sudo apt-get update
@@ -29,7 +30,7 @@ sudo apt-get install ansible -y
 sudo apt-get install python -y
 ```
 
-3. Tell Ansible how to communicate with each virtual machine.
+* Tell Ansible how to communicate with each virtual machine.
 
 The Ansible Invertiry File is the way we use to indicate Ansible hot to access remote machines. The inventory file located at */etc/ansible/hosts*.
 
@@ -46,7 +47,7 @@ slave_1 ansible_host=127.0.0.1 ansible_port=2200 ansible_user=vagrant ansible_ss
 slave_2 ansible_host=127.0.0.1 ansible_port=2201 ansible_user=vagrant ansible_ssh_private_key_file=/home/username/Desktop/vagrant/cluster/.vagrant/machines/slave_2/virtualbox/private_key
 ```
 
-4. Test if all machines are listening Ansible.
+* Test if all machines are listening Ansible.
 
 ```sh
 ansible -m ping vagrant_cluster
@@ -55,6 +56,7 @@ ansible -m ping vagrant_cluster
 # Todo
 
 - [ ] Steps to configure a real cluster passwordless.
+
 
 # References
 
