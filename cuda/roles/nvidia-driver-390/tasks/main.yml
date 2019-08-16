@@ -3,9 +3,13 @@
   apt: update_cache=yes
 
 - name: Install required packages
-  apt: name={{ item }} state=present
-  with_items:
-    - nvidia-driver-390
+  apt: 
+    name: 
+      - aptitude
+    state: present
+
+- name: Install required packages (please, be pacient ...)
+  shell: aptitude install -y nvidia-driver-390
 
 - name: Reboot and wait for reboot to complete
   reboot:

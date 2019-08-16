@@ -51,3 +51,6 @@
 # root as group and owner. So we need MPI user be the group and owner
 - name: Change MPI user home dir permissions
   shell: chown {{ mpi_user_name }}:{{ mpi_user_name }} /home/{{ mpi_user_name }}
+
+- name: Reboot and wait for reboot to complete
+  reboot:

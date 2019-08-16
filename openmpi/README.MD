@@ -47,3 +47,7 @@ For other machines, remote machines user will require to promnt the user paswwor
 ```sh
 ansible-playbook playbook.yml -K -c paramiko 
 ```
+
+## Todo 
+
+- [ ] Reboot NFS server when installed

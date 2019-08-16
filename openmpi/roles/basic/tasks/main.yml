@@ -12,7 +12,7 @@
       - nfs-kernel-server 
     state: present
 
-- name: Diable known host checking in SSH
+- name: Disable known host checking in SSH
   lineinfile: >
     dest=/etc/ssh/ssh_config
     line="StrictHostKeyChecking no" 

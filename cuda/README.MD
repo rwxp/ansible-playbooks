@@ -2,14 +2,31 @@
 
 This playbook includes:
 
-* nvidia-driver-410
 * nvidia-dirver-390
-* cuda toolkit 10 (it supported since nvidia-driver-410)
+* nvidia-driver-410 (tested in ubuntu 18.04 and Quadro K2200)
+* nvidia-dirver-418 (tested in ubuntu 18.04.2 and Quadro K2200)
+* cuda 10 (it supported since nvidia-driver-410 Quadro K2200)
+
+## Prepare Playbook
+
+Edit the file playbook.yml file to add a reference to the hosts to be provisioned. Set hosts by hostname or by IP address.
+
+```yaml
+---
+- name: Setting up nodes
+  hosts: 
+    - m
+  user: vagrant
+  become: true
+  roles: 
+    - nvidia-driver-410
+    - cuda
+```
 
 ## Run
 
 ```sh
-ansible-playbook playbook.yml
+ansible-playbook -K playbook.yml
 ```
 
 ## Todo

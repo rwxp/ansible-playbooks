@@ -15,7 +15,7 @@
     state: present
 
 - name: Install required packages (please, be pacient ...)
-  shell: aptitude install -y nvidia-driver-410
+  shell: aptitude install -y nvidia-driver-418
 
 - name: Reboot machine and wait to continue (please, be pacient ...)
   reboot:
@@ -26,4 +26,4 @@
   become: no
 
 - debug: msg="Hello world success!"
-  when: "'NVIDIA-SMI 410' in world.stdout_lines"
+  when: "'NVIDIA-SMI 418' in world.stdout_lines"
