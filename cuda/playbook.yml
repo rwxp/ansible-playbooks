@@ -1,9 +1,14 @@
 ---
 - name: Setting up nodes
   hosts:
-    - n
+    # - o
+    # - p 
+    - i 
   user: clouduser
   become: true
   roles: 
-    - nvidia-driver-410
+    - nvidia-driver
     - cuda-10
+
+  vars:
+    nvidia_driver_version: 440
