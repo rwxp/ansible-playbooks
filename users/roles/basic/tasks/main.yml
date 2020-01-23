@@ -1,0 +1,13 @@
+- name: Create a master MPI user
+  user:
+    name: "{{ user_name }}"
+    password: "{{ user_name_passwd | password_hash('sha512') }}"
+    state: absent
+    shell: /bin/bash       
+    system: no             
+    createhome: yes        
+    home: /home/{{ user_name }}
+    groups:
+      - docker
+    # generate_ssh_key: yes
+    # ssh_key_file: .ssh/id_rsa

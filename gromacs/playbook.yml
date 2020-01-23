@@ -1,19 +1,13 @@
 ---
 - name: Setting up gromacs 2018
   hosts: 
-    - A
+    #- m
+    - n
+    #- o
+    #- p
+    # - i
     # - B
-    - C
-    - D
-    - E
-    - F
-    - G
-    - H
-    - I
-    - J
-    - K
-    - L
-  user: vagrant
+  user: clouduser
   roles: 
     - basic
 

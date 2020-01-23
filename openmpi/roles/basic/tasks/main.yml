@@ -91,10 +91,10 @@
 - debug: msg="Hello world success!"
   when: "'Hello, World, I am 0 of 1' in world.stdout_lines"
 
-- name: Create /etc/hosts directory
-  template:
-    src: hosts.j2
-    dest: /etc/hosts
-    owner: root
-    group: root
-    mode: 0644
+# - name: Create /etc/hosts directory
+#   template:
+#     src: hosts.j2
+#     dest: /etc/hosts
+#     owner: root
+#     group: root
+#     mode: 0644

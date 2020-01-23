@@ -34,6 +34,6 @@ ansible-playbook -K playbook.yml
 * The script does not place the LD_LIBRARY_PATH in the environment. This can lead some mistakes while using cuda. 
 
 ```sh
+export PATH=$PATH:/usr/local/cuda-10.0/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64
 ```
-
