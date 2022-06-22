@@ -5,3 +5,6 @@
     src: "{{ item.src }}"
     state: mounted
   with_items: "{{ nfs_imports }}"
+
+- name: Reboot and wait for reboot to complete
+  reboot:
