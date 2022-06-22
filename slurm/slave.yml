@@ -18,5 +18,5 @@
       - { name: "galaxy-3", ip: 10.0.0.4, cpus: 1, mem: 500 }
     nfs_imports:
       - { name: /home, src: 'galaxy-2:/home', type: nfs }
-      - { name: /etc/munge/munge.key, src: 'galaxy-2:/etc/munge/munge.key', type: nfs }
+      - { name: /etc/munge, src: 'galaxy-2:/etc/munge', type: nfs }
       #- { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
