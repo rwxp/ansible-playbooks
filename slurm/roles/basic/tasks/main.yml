@@ -56,28 +56,32 @@
     path: '/etc/munge/'
     owner: munge
     group: munge
-    mode: '0700'
+    mode: 0700
+    recurse: yes
 
 - name: Grant the proper permissions to the munge /var/log/munge/ folder
   file: 
     path: /var/log/munge/
     owner: munge
     group: munge
-    mode: '0700'
+    mode: 0700
+    recurse: yes
 
 - name: Grant the proper permissions to the munge /var/lib/munge/ folder
   file: 
     path: '/var/lib/munge/'
     owner: munge
     group: munge
-    mode: '0700'
+    mode: 0700
+    recurse: yes
 
 - name: Grant the proper permissions to the munge /run/munge/ folder
   file:
     path: /run/munge/
     owner: munge
     group: munge
-    mode: '0755'
+    mode: 0755
+    recurse: yes
 
 - name: Make sure munge service unit is running
   service:
@@ -94,9 +98,7 @@
   template:
     src: slurm.conf.j2
     dest: /etc/slurm-llnl/slurm.conf
-    owner: slurm
-    group: slurm
-    mode: 755
+    mode: 0755
 
 - name: Make sure slurmctld service unit is running
   service:
