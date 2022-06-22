@@ -1,8 +1,8 @@
 ---
 - name: Setting up master node
   hosts:
-    - galaxy-1
-  user: clouduser
+    - galaxy-2
+  user: vagrant
   become: true
   roles: 
     - basic
@@ -16,6 +16,7 @@
     hosts:
       - { name: "galaxy-1", ip: 10.0.0.2, cpus: 1, mem: 500 }
       - { name: "galaxy-2", ip: 10.0.0.3, cpus: 1, mem: 500 }
+      - { name: "galaxy-3", ip: 10.0.0.4, cpus: 1, mem: 500 }
 
     nfs_exports:
       # users accounts
@@ -30,11 +31,11 @@
       - { name: /etc/munge, src: 'galaxy-1:/etc/munge', type: nfs }
       - { name: /etc/slurm-llnl, src: 'galaxy-1:/etc/slurm-llnl', type: nfs }
 
-# - name: Setting up slave nodes
-#   hosts: 
-#     - n
-#   user: clouduser
-#   become: true
-#   roles: 
-#     - basic
-#     - slave
+- name: Setting up slave nodes
+  hosts: 
+    - galaxy-3
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+    - slave
