@@ -40,7 +40,7 @@ SlurmdDebug=info
 SlurmdLogFile=/var/log/slurm-llnl/slurmd.log
 #
 # COMPUTE NODES
-{% for host in mpi_hosts %}
+{% for host in hosts %}
 NodeName={{ host.name }} CPUs={{ host.cpus }} RealMemory={{ host.mem }} State=UNKNOWN
 {% endfor %}
 PartitionName=local Nodes=ALL Default=YES MaxTime=INFINITE State=UP
