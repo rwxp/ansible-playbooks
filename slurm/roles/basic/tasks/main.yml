@@ -51,25 +51,33 @@
 - name: Create munge key for authentication ...
   command: /usr/sbin/create-munge-key -f
 
-- name: Grant the proper permissions to the munge folders
+- name: Grant the proper permissions to the munge /etc/munge/ folder
   file: 
-    path: '{{ item }}'
+    path: '/etc/munge/'
     owner: munge
     group: munge
     mode: '0700'
-    loop:
-      - /etc/munge/ 
-      - /var/log/munge/ 
-      - /var/lib/munge/ 
 
-- name: Grant the proper permissions to the munge /run/munge folder
+- name: Grant the proper permissions to the munge /var/log/munge/ folder
+  file: 
+    path: /var/log/munge/
+    owner: munge
+    group: munge
+    mode: '0700'
+
+- name: Grant the proper permissions to the munge /var/lib/munge/ folder
+  file: 
+    path: '/var/lib/munge/'
+    owner: munge
+    group: munge
+    mode: '0700'
+
+- name: Grant the proper permissions to the munge /run/munge/ folder
   file:
-    path: '{{ item }}'
+    path: /run/munge/
     owner: munge
     group: munge
     mode: '0755'
-    loop:
-      - /run/munge
 
 - name: Make sure munge service unit is running
   service:
@@ -90,10 +98,10 @@
     group: slurm
     mode: 755
 
-# - name: Make sure slurmctld service unit is running
-#   service:
-#     state: started
-#     name: slurmctld
+- name: Make sure slurmctld service unit is running
+  service:
+    state: started
+    name: slurmctld
 
 - name: Make sure slurmd service unit is running
   service:
