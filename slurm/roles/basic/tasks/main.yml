@@ -56,7 +56,6 @@
 
 - name: Create munge key for authentication ...
   command: /usr/sbin/create-munge-key -f
-  tags: slave_only
 
 - name: Grant the proper permissions to the munge /etc/munge/ folder
   file: 
@@ -65,7 +64,6 @@
     group: munge
     mode: 0700
     recurse: yes
-  tags: slave_only
 
 - name: Grant the proper permissions to the munge /var/log/munge/ folder
   file: 
