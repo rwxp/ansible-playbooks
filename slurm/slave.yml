@@ -19,4 +19,4 @@
     nfs_imports:
       - { name: /home, src: 'galaxy-2:/home', type: nfs }
       - { name: /etc/munge, src: 'galaxy-2:/etc/munge', type: nfs }
-      - { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
+      #- { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
