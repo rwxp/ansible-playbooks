@@ -62,14 +62,14 @@
       - /var/log/munge/ 
       - /var/lib/munge/ 
 
-- name: Grant the proper permissions to the munge folders
+- name: Grant the proper permissions to the munge /run/munge folder
   file:
     path: '{{ item }}'
     owner: munge
     group: munge
     mode: '0755'
     loop:
-    - /run/munge
+      - /run/munge
 
 - name: Make sure munge service unit is running
   service:
