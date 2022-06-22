@@ -5,6 +5,8 @@
     src: "{{ item.src }}"
     state: mounted
   with_items: "{{ nfs_imports }}"
+  tags: slave_only
 
 - name: Reboot and wait for reboot to complete
   reboot:
+  tags: slave_only
