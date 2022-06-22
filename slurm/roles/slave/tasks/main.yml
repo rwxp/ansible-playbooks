@@ -1,0 +1,7 @@
+- name: Mount nfs directories
+  mount:
+    fstype: "{{ item.type }}"
+    name: "{{ item.name }}"
+    src: "{{ item.src }}"
+    state: mounted
+  with_items: "{{ nfs_imports }}"
