@@ -1,0 +1,22 @@
+- name: Setting up slave nodes
+  hosts: 
+    - galaxy-3
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+    - slave
+  vars:
+    cluster_name: galaxy.cluster
+    master_node_hostname: galaxy-2
+    munge_user_passwd: jlDmPv
+    slurm_user_passwd: jlDmPv
+    # Hosts for slurm.conf file
+    hosts:
+      #- { name: "galaxy-1", ip: 10.0.0.2, cpus: 1, mem: 500 }
+      - { name: "galaxy-2", ip: 10.0.0.3, cpus: 1, mem: 500 }
+      - { name: "galaxy-3", ip: 10.0.0.4, cpus: 1, mem: 500 }
+    nfs_imports:
+      - { name: /home, src: 'galaxy-2:/home', type: nfs }
+      - { name: /etc/munge, src: 'galaxy-2:/etc/munge', type: nfs }
+      - { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
