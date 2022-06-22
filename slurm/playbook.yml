@@ -29,11 +29,11 @@
 - name: Setting up slave nodes
   hosts: 
     - galaxy-3
-  tags: slave_only
   user: vagrant
   become: true
   roles: 
-    - basic
+    - role: basic
+      tags: slave_only
     - slave
   vars:
     cluster_name: galaxy.cluster
@@ -46,6 +46,6 @@
       - { name: "galaxy-2", ip: 10.0.0.3, cpus: 1, mem: 500 }
       - { name: "galaxy-3", ip: 10.0.0.4, cpus: 1, mem: 500 }
     nfs_imports:
-      - { name: /home, src: 'galaxy-1:/home', type: nfs }
-      - { name: /etc/munge, src: 'galaxy-1:/etc/munge', type: nfs }
-      - { name: /etc/slurm-llnl, src: 'galaxy-1:/etc/slurm-llnl', type: nfs }
+      - { name: /home, src: 'galaxy-2:/home', type: nfs }
+      - { name: /etc/munge, src: 'galaxy-2:/etc/munge', type: nfs }
+      - { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
