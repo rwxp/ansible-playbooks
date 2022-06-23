@@ -18,5 +18,5 @@
   service: "name=nfs-kernel-server state=started enabled=yes"
   when: nfs_exports|length
 
-- name: Reboot and wait for reboot to complete
-  reboot:
+# - name: Reboot and wait for reboot to complete
+#   reboot:
