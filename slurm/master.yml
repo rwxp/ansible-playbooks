@@ -6,7 +6,7 @@
   become: true
   roles: 
     - basic
-    # - master
+    - master
   vars:
     cluster_name: galaxy.cluster
     master_node_hostname: openmp-tutorial-00
@@ -14,6 +14,7 @@
     slurm_user_passwd: jlDmPv
     # Hosts for slurm.conf file
     hosts:
+      - { name: "openmp-tutorial-00", men: 187000, cpus: 48, ip: 10.140.83.191 }
       - { name: "openmp-tutorial-1", men: 187000, cpus: 48, ip: 10.140.83.180 }
       - { name: "openmp-tutorial-2", men: 187000, cpus: 48, ip: 10.140.82.20 }
       - { name: "openmp-tutorial-3", men: 187000, cpus: 48, ip: 10.140.82.70 }

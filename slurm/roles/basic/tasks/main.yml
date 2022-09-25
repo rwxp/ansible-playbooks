@@ -1,128 +1,130 @@
 - name: Update /etc/hosts
-  command: grep -qxF "{{ item.ip }} {{ item.name }}" /etc/hosts || echo "{{ item.ip }} {{ item.name }}" >> /etc/hosts
+  shell: "grep -qxF \"{{ item.ip }} {{ item.name }}\" /etc/hosts | echo \"{{ item.ip }} {{ item.name }}\" >> /etc/hosts "
   with_items: "{{ hosts }}"
+  register: cmdln
+  check_mode: no
 
-# - name: Create munge group
-#   group:
-#     name: munge
-#     state: present
-#     gid: 3456
-#   tags: slave_only
+- name: Create munge group
+  group:
+    name: munge
+    state: present
+    gid: 3456
+  tags: slave_only
 
-# - name: Create munge user
-#   user:
-#     name: "munge"
-#     uid: 3456
-#     group: munge
-#     password: "{{ munge_user_passwd | password_hash('sha512') }}"
-#     state: present
-#     shell: /sbin/nologin       
-#     system: no             
-#     createhome: yes        
-#     home: /var/lib/munge
-#   tags: slave_only
+- name: Create munge user
+  user:
+    name: "munge"
+    uid: 3456
+    group: munge
+    password: "{{ munge_user_passwd | password_hash('sha512') }}"
+    state: present
+    shell: /sbin/nologin       
+    system: no             
+    createhome: yes        
+    home: /var/lib/munge
+  tags: slave_only
 
-# - name: Create slurm group
-#   group:
-#     name: slurm
-#     state: present
-#     gid: 3457
-#   tags: slave_only
+- name: Create slurm group
+  group:
+    name: slurm
+    state: present
+    gid: 3457
+  tags: slave_only
 
-# - name: Create slurm user
-#   user:
-#     name: "slurm"
-#     uid: 3457
-#     group: slurm
-#     password: "{{ slurm_user_passwd | password_hash('sha512') }}"
-#     state: present
-#     shell: /bin/bash       
-#     system: no             
-#     createhome: yes        
-#     home: /var/lib/slurm
-#   tags: slave_only
+- name: Create slurm user
+  user:
+    name: "slurm"
+    uid: 3457
+    group: slurm
+    password: "{{ slurm_user_passwd | password_hash('sha512') }}"
+    state: present
+    shell: /bin/bash       
+    system: no             
+    createhome: yes        
+    home: /var/lib/slurm
+  tags: slave_only
 
-# - name: Update ubuntu
-#   apt: update_cache=yes
-#   tags: slave_only
+- name: Update ubuntu
+  apt: update_cache=yes
+  tags: slave_only
 
-# - name: Install nfs and munge packages
-#   apt:
-#     pkg:
-#       - build-essential
-#       - nfs-common
-#       - nfs-kernel-server 
-#       - munge 
-#       - libmunge2 
-#       - libmunge-dev
-#     state: present
-#   tags: slave_only
+- name: Install nfs and munge packages
+  apt:
+    pkg:
+      - build-essential
+      - nfs-common
+      - nfs-kernel-server 
+      - munge 
+      - libmunge2 
+      - libmunge-dev
+    state: present
+  tags: slave_only
 
-# - name: Create munge key for authentication ...
-#   command: /usr/sbin/create-munge-key -f
+- name: Create munge key for authentication ...
+  command: /usr/sbin/create-munge-key -f
 
-# - name: Grant the proper permissions to the munge /etc/munge/ folder
-#   file: 
-#     path: '/etc/munge/'
-#     owner: munge
-#     group: munge
-#     mode: 0700
-#     recurse: yes
+- name: Grant the proper permissions to the munge /etc/munge/ folder
+  file: 
+    path: '/etc/munge/'
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
 
-# - name: Grant the proper permissions to the munge /var/log/munge/ folder
-#   file: 
-#     path: /var/log/munge/
-#     owner: munge
-#     group: munge
-#     mode: 0700
-#     recurse: yes
-#   tags: slave_only
+- name: Grant the proper permissions to the munge /var/log/munge/ folder
+  file: 
+    path: /var/log/munge/
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
+  tags: slave_only
 
-# - name: Grant the proper permissions to the munge /var/lib/munge/ folder
-#   file: 
-#     path: '/var/lib/munge/'
-#     owner: munge
-#     group: munge
-#     mode: 0700
-#     recurse: yes
-#   tags: slave_only
+- name: Grant the proper permissions to the munge /var/lib/munge/ folder
+  file: 
+    path: '/var/lib/munge/'
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
+  tags: slave_only
 
-# - name: Grant the proper permissions to the munge /run/munge/ folder
-#   file:
-#     path: /run/munge/
-#     owner: munge
-#     group: munge
-#     mode: 0755
-#     recurse: yes
-#   tags: slave_only
+- name: Grant the proper permissions to the munge /run/munge/ folder
+  file:
+    path: /run/munge/
+    owner: munge
+    group: munge
+    mode: 0755
+    recurse: yes
+  tags: slave_only
 
-# - name: Make sure munge service unit is running
-#   service:
-#     state: started
-#     name: munge
-#   tags: slave_only
+- name: Make sure munge service unit is running
+  service:
+    state: started
+    name: munge
+  tags: slave_only
 
-# - name: Install slurmctld and slurmd packages
-#   apt:
-#     pkg:
-#       - slurm-wlm
-#     state: present
-#   tags: slave_only
+- name: Install slurmctld and slurmd packages
+  apt:
+    pkg:
+      - slurm-wlm
+    state: present
+  tags: slave_only
 
-# - name: Create /etc/slurm-llnl/slurm.conf
-#   template:
-#     src: slurm.conf.j2
-#     dest: /etc/slurm-llnl/slurm.conf
-#     mode: 0755
-#   tags: slave_only
+- name: Create /etc/slurm-llnl/slurm.conf
+  template:
+    src: slurm.conf.j2
+    dest: /etc/slurm-llnl/slurm.conf
+    mode: 0755
+  tags: slave_only
   
-# - name: Make sure slurmctld service unit is running
-#   service:
-#     state: started
-#     name: slurmctld
+- name: Make sure slurmctld service unit is running
+  service:
+    state: started
+    name: slurmctld
 
-# - name: Make sure slurmd service unit is running
-#   service:
-#     state: started
-#     name: slurmd
-#   tags: slave_only
+- name: Make sure slurmd service unit is running
+  service:
+    state: started
+    name: slurmd
+  tags: slave_only

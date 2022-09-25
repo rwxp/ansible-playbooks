@@ -1,7 +1,14 @@
 - name: Setting up slave nodes
   hosts: 
-    - galaxy-3
-  user: vagrant
+    - openmp-tutorial-00
+    - openmp-tutorial-1
+    - openmp-tutorial-2
+    - openmp-tutorial-3
+    - openmp-tutorial-4
+    - openmp-tutorial-5
+    - openmp-tutorial-6
+    - openmp-tutorial-7
+  user: cc
   become: true
   roles: 
     - basic
@@ -13,6 +20,7 @@
     slurm_user_passwd: jlDmPv
     # Hosts for slurm.conf file
     hosts:
+      - { name: "openmp-tutorial-00", men: 187000, cpus: 48, ip: 10.140.83.191 }
       - { name: "openmp-tutorial-1", men: 187000, cpus: 48, ip: 10.140.83.180 }
       - { name: "openmp-tutorial-2", men: 187000, cpus: 48, ip: 10.140.82.20 }
       - { name: "openmp-tutorial-3", men: 187000, cpus: 48, ip: 10.140.82.70 }
