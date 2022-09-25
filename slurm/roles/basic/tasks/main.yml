@@ -1,5 +1,5 @@
 - name: Update /etc/hosts
-  command: grep -qxF "{{ item.ip }} {{ item.name }}" /etc/hosts || echo {{ item.ip }} {{ item.name }} >> /etc/hosts
+  command: grep -qxF "{{ item.ip }} {{ item.name }}" /etc/hosts || echo "{{ item.ip }} {{ item.name }}" >> /etc/hosts
   with_items: "{{ hosts }}"
 
 # - name: Create munge group
