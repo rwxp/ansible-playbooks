@@ -1,6 +1,5 @@
 - name: Setting up slave nodes
   hosts: 
-    - openmp-tutorial-00
     - openmp-tutorial-1
     - openmp-tutorial-2
     - openmp-tutorial-3
