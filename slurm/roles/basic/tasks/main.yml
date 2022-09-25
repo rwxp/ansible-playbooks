@@ -3,6 +3,7 @@
   with_items: "{{ hosts }}"
   register: cmdln
   check_mode: no
+  tags: slave_only
 
 - name: Create munge group
   group:
