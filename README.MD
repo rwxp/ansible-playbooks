@@ -35,7 +35,7 @@ sudo apt-get install python -y
 The Ansible Invertiry File is the way we use to indicate Ansible hot to access remote machines. The inventory file located at */etc/ansible/hosts*.
 
 ```sh
-nano /etc/ansible/hosts
+sudo nano /etc/ansible/hosts
 ```
 
 Ansible will use the privated keys provided by vagrant to access the cluster deployed with vagrant.
