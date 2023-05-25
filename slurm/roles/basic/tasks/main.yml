@@ -117,12 +117,16 @@
     state: present
   tags: slave_only
 
+- name: Create /etc/slurm-llnl directory if not present
+  file:
+    path: /etc/slurm-llnl
+    state: directory
+
 - name: Create /etc/slurm-llnl/slurm.conf
   template:
     src: slurm.conf.j2
     dest: /etc/slurm-llnl/slurm.conf
     mode: 0755
-    state: directory
   tags: slave_only
   
 - name: Make sure slurmctld service unit is running
