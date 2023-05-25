@@ -2,8 +2,8 @@
 # Put this file on all nodes of your cluster.
 # See the slurm.conf man page for more information.
 #
-ClusterName={{ cluster_name }}
-SlurmctldHost={{ master_node_hostname }}
+ClusterName={{ slurm_cluster_name }}
+SlurmctldHost={{ slurm_master_hostname }}
 MpiDefault=none
 ProctrackType=proctrack/linuxproc
 ReturnToService=2
@@ -40,8 +40,8 @@ SlurmdDebug=info
 SlurmdLogFile=/var/log/slurm-llnl/slurmd.log
 #
 # COMPUTE NODES
-{% for host in hosts %}
-NodeName={{ host.name }} CPUs={{ host.cpus }} RealMemory={{ host.mem }} State=UNKNOWN
+{% for host in cluster_hostnames %}
+NodeName={{ host.name }} CPUs={{ slurm_compute_cpus }} RealMemory={{ slurm_compute_mem }} State=UNKNOWN
 {% endfor %}
 PartitionName=local Nodes=ALL Default=YES MaxTime=INFINITE State=UP
 
