@@ -25,7 +25,7 @@ Passwordless is required between a Control Machine and Machines Under Configurat
 
 ```sh
 sudo apt-get update
-sudo apt-add-repository ppa:ansible/ansible
+sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get install ansible -y
 sudo apt-get install python -y
 ```
@@ -47,16 +47,27 @@ slave_1 ansible_host=127.0.0.1 ansible_port=2200 ansible_user=vagrant ansible_ss
 slave_2 ansible_host=127.0.0.1 ansible_port=2201 ansible_user=vagrant ansible_ssh_private_key_file=/home/username/Desktop/vagrant/cluster/.vagrant/machines/slave_2/virtualbox/private_key
 ```
 
+or
+
+```sh
+[cluster]
+ss2023-00 ansible_host=127.0.0.1 ansible_port=22 ansible_user=vagrant ansible_ssh_private_key_file=/home/<username>/.ssh/private_key
+```
+
 * Test if all machines are listening Ansible.
 
 ```sh
 ansible -m ping vagrant_cluster
 ```
+or
+
+```sh
+ansible -m ping cluster
+```
 
 # Todo
 
 - [ ] Steps to configure a real cluster passwordless.
-
 
 # References
 
