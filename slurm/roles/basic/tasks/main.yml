@@ -117,10 +117,10 @@
     state: present
   tags: slave_only
 
-- name: Create /etc/slurm-llnl/slurm.conf
+- name: Create /etc/slurm.conf
   template:
     src: slurm.conf.j2
-    dest: /etc/slurm-llnl/slurm.conf
+    dest: /etc/slurm.conf
     mode: 0755
   tags: slave_only
   
