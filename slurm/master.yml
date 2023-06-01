@@ -15,7 +15,7 @@
     # slurm_compute_mem: 187000
     # Vagrant
     slurm_compute_cpus: 2
-    slurm_compute_mem: 4096
+    slurm_compute_mem: 4018
     slurm_master_hostname: ss2023-00
     slurm_user_passwd: jlDmPv
     munge_user_passwd: jlDmPv
