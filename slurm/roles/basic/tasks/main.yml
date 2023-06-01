@@ -122,10 +122,10 @@
 #     path: /etc/slurm-llnl
 #     state: directory
 
-- name: Create /etc/slurm-llnl/slurm.conf
+- name: Create /etc/slurm/slurm.conf
   template:
     src: slurm.conf.j2
-    dest: /etc/slurm-llnl/slurm.conf
+    dest: /etc/slurm/slurm.conf
     mode: 0755
   tags: slave_only
   
