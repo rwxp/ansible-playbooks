@@ -1,0 +1,5 @@
+- name: create some test users
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: "{{ users_state }}"
+  with_sequence: start={{ users_seq_start }} end={{ users_seq_start }} format={{ users_seq_format }}
