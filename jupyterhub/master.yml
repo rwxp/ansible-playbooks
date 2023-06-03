@@ -14,6 +14,6 @@
     jupyterhub_admin_groups: "'vagrant'"
     users_seq_format: ss%02x
     users_seq_start: 1
-    users_seq_start: 12
+    users_seq_end: 12
     # Delete with "absent"
     users_state: present
