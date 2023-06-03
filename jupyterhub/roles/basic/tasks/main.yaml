@@ -10,7 +10,6 @@
   template:
     src: jupyterhub_config.py.j2
     dest: /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
-    recurse: true
     mode: 0755
 
 - name: Create virtualenv in /opt/jupyterhub/
