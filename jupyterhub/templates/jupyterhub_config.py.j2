@@ -16,7 +16,7 @@ c.LocalAuthenticator.create_system_users = True
 # administrator. By default, JupyterHub uses the PAMAuthenticator which provides
 # the admin_groups option and can set administrator status based on a user group.
 # For example, we can let any user in the wheel group be an admin:
-c.PAMAuthenticator.admin_groups = \{ {{ admin_groups }} \}
+c.PAMAuthenticator.admin_groups = { {{ admin_groups }} }
 
 ## The command used for starting the single-user server.
 c.Spawner.cmd = ['/opt/jupyterhub/bin/jupyterhub-singleuser']
