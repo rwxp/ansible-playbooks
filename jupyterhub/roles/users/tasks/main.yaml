@@ -1,4 +1,4 @@
-- name: create some test users
+- name: Create/delete users
   ansible.builtin.user:
     name: "{{ item }}"
     state: "{{ users_state }}"
