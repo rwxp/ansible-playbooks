@@ -9,5 +9,5 @@
     - basic
   vars:
     # Comma separed user groups with admin acces in jupyterhub.
-    # Example: 'wheel','vagrant'
-    admin_groups: 'vagrant'
+    # Example: "'wheel','vagrant'"
+    admin_groups: "'vagrant'"
