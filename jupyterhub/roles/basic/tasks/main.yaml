@@ -27,16 +27,16 @@
 - name: Install configurable-http-proxy
   command: npm install -g configurable-http-proxy
 
-- name: Ensure '/opt/jupyterhub/etc/systemd/jupyterhub' dir exists
+- name: Ensure '/opt/jupyterhub/etc/systemd' dir exists
   file: 
-    path: /opt/jupyterhub/etc/systemd/jupyterhub
+    path: /opt/jupyterhub/etc/systemd
     recurse: true
     state: directory
 
 - name: Create jupyterhub.service
   template:
     src: jupyterhub.service.j2
-    dest: /opt/jupyterhub/etc/systemd/jupyterhub/jupyterhub.service
+    dest: /opt/jupyterhub/etc/systemd/jupyterhub.service
     mode: 0755
 
 - name: Install /opt/jupyterhub/etc/systemd/jupyterhub.service
