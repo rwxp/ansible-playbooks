@@ -6,14 +6,20 @@
       - npm
     state: present
 
+- name: Create virtualenv in /opt/jupyterhub/
+  command: python3 -m venv /opt/jupyterhub/
+
+# - name: Ensure '/opt/jupyterhub/etc/jupyterhub/' dir exists
+#   file: 
+#     path: /opt/jupyterhub/etc/jupyterhub/
+#     recurse: true
+#     state: directory
+
 - name: Create /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
   template:
     src: jupyterhub_config.py.j2
     dest: /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
     mode: 0755
-
-- name: Create virtualenv in /opt/jupyterhub/
-  command: python3 -m venv /opt/jupyterhub/
 
 - name: Install Jupyter Hub/Lab
   command: /opt/jupyterhub/bin/python3 -m pip install wheel jupyterhub jupyterlab ipywidgets
