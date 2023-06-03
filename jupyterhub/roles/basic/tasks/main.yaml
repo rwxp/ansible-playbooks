@@ -36,10 +36,10 @@
 - name: Create jupyterhub.service
   template:
     src: jupyterhub.service.j2
-    dest: /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+    dest: /opt/jupyterhub/etc/systemd/jupyterhub/jupyterhub_config.py
     mode: 0755
 
-- name: Grant the proper permissions to the munge /etc/munge/ folder
+- name: Install /opt/jupyterhub/etc/systemd/jupyterhub.service
   file: 
     src: /opt/jupyterhub/etc/systemd/jupyterhub.service
     dest: /etc/systemd/system/jupyterhub.service
