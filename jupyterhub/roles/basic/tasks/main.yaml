@@ -9,11 +9,11 @@
 - name: Create virtualenv in /opt/jupyterhub/
   command: python3 -m venv /opt/jupyterhub/
 
-# - name: Ensure '/opt/jupyterhub/etc/jupyterhub/' dir exists
-#   file: 
-#     path: /opt/jupyterhub/etc/jupyterhub/
-#     recurse: true
-#     state: directory
+- name: Ensure '/opt/jupyterhub/etc/jupyterhub/' dir exists
+  file: 
+    path: /opt/jupyterhub/etc/jupyterhub/
+    recurse: true
+    state: directory
 
 - name: Create /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
   template:
