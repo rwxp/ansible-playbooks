@@ -7,6 +7,7 @@
   become: true
   roles: 
     - basic
+    - users
   vars:
     # Comma separed user groups with admin acces in jupyterhub.
     # Example: "'wheel','vagrant'"
