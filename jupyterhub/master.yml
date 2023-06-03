@@ -17,4 +17,4 @@
     users_seq_end: 12
     # Delete with "absent"
     users_state: present
-    users_passwd: "ss2023"
+    users_passwd: ss2023
