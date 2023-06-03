@@ -31,7 +31,6 @@
   file: 
     src: /opt/jupyterhub/etc/systemd/jupyterhub.service
     dest: /etc/systemd/system/jupyterhub.service
-    recurse: true
     state: link
 
 - name: Make sure JupyterHub service unit is running
