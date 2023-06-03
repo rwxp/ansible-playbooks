@@ -27,6 +27,18 @@
 - name: Install configurable-http-proxy
   command: npm install -g configurable-http-proxy
 
+- name: Ensure '/opt/jupyterhub/etc/systemd/' dir exists
+  file: 
+    path: /opt/jupyterhub/etc/systemd/
+    recurse: true
+    state: directory
+
+- name: Create jupyterhub.service
+  template:
+    src: jupyterhub.service.j2
+    dest: /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+    mode: 0755
+
 - name: Grant the proper permissions to the munge /etc/munge/ folder
   file: 
     src: /opt/jupyterhub/etc/systemd/jupyterhub.service
