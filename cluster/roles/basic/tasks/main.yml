@@ -3,7 +3,7 @@
     name: "{{ inventory_hostname }}"
 
 - name: Update /etc/hosts
-  shell: "grep -qxF \"{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}\" /etc/hosts | echo \"{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}\" >> /etc/hosts "
+  shell: "grep -qxF \"{{ item.ip }} {{ item.name }}\" /etc/hosts | echo \"{{ item.ip }} {{ item.name }}\" >> /etc/hosts "
   with_items: "{{ cluster_hostnames }}"
   register: cmdln
   check_mode: no

@@ -3,6 +3,9 @@
 This repo includes ansible playbooks to automate the provisioning of several machines with a single command. We provide a list of available playbooks as follows:
 
 **Ubuntu 18.04 LTS**
+ - cluster: NFS based cluster.
+ - jupyterhub: jupyterlab
+ - users: users creation/deletion
  - cuda 10 (nvidia-driver-410,nvidia-driver-390,cuda)
  - docker (docker.io,nvidia-docker2)
  - openmpi 3.1.2 (NFS, passwordless, openmpi)
@@ -11,12 +14,26 @@ This repo includes ansible playbooks to automate the provisioning of several mac
 
 ### About Ansible
 
-Ansible is an **Agentless** Configuration Management Tool commonly used to automate three types of tasks: Provisioning, Configuration Manangement and Application Deployment. Ansible considers to kind of machines:
+Ansible is an **Agentless** Configuration Management Tool commonly used to automate three types of tasks: Provisioning, Configuration Manangement and Application Deployment. Ansible considers two kind of machines:
 
 - Control Machines (CM)
 - Machines Under Configuration (MUC)
 
-Passwordless is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require python to be installed.
+Passwordless is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require Python.
+
+### Ensable Passwordless for Ansible Provisioning
+
+Create a ssh key in a CM machine.
+
+```bash
+ssh-keygen -q -t rsa -N '' -f /home/vagrant/.ssh/id_rsa <<<y >/dev/null 2>&1
+```
+
+Copy the ssh key to all the MUC.
+
+```bash
+ssh-copy-id -i /home/<local_username>/.ssh/id_rsa <remote_username>@<ip>
+```
 
 ### Lets Play with the Playbooks
 
