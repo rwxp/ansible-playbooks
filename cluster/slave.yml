@@ -1,5 +1,4 @@
 - name: Setting up slave nodes
-  # Target nodes
   hosts: 
     - ss2023-01
   user: vagrant
@@ -7,4 +6,5 @@
   roles: 
     - basic
     - slave
-
+  vars_files:
+    - ./vars/common.yaml
