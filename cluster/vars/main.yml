@@ -1,0 +1,10 @@
+# All cluster nodes
+# Used to update /etc/hosts
+cluster_hostnames:
+  - ss2023-00
+  - ss2023-01
+nfs_exports:
+  - /home *(rw,sync,no_root_squash,no_subtree_check)
+# Comment if the master node will be used also as slave node.
+nfs_imports:
+  - { name: /home, src: 'ss2023-00:/home', type: nfs }
