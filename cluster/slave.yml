@@ -1,0 +1,19 @@
+- name: Setting up slave nodes
+  # Target nodes
+  hosts: 
+    - ss2023-01
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+    - slave
+  vars:
+    # All cluster nodes
+    # Used to update /etc/hosts
+    # Used to create slurm.conf file
+    cluster_hostnames:
+      - ss2023-00
+      - ss2023-01
+    # Comment if the master node will be used also as slave node.
+    nfs_imports:
+      - { name: /home, src: 'ss2023-00:/home', type: nfs }

@@ -3,7 +3,7 @@
 Deploy
 
 ```bash
-ansible-playbook master.yml -K
+ansible-playbook main.yml -K
 ```
 
 In some cases it is required to enable the jupyterhub port in the firewall.

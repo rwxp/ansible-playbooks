@@ -30,4 +30,4 @@
       # munge authentication keys
       - /etc/munge *(rw,sync,no_root_squash,no_subtree_check)
       # for slurm.confg and gres.conf files 
-      - /etc/slurm-llnl *(rw,sync,no_root_squash,no_subtree_check)
+      - /etc/slurm *(rw,sync,no_root_squash,no_subtree_check)

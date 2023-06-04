@@ -1,3 +1,6 @@
+- name: Update ubuntu
+  apt: update_cache=yes
+
 - name: Install prerequisites
   apt:
     pkg:
