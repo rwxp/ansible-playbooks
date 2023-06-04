@@ -19,25 +19,14 @@ Ansible is an **Agentless** Configuration Management Tool commonly used to autom
 - Control Machines (CM)
 - Machines Under Configuration (MUC)
 
-Passwordless is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require Python.
+Passwordless (instructions below) is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require Python.
 
-### Ensable Passwordless for Ansible Provisioning
+### Use playbooks using Vagrant
 
-Create a ssh key in a CM machine.
+* Get into the **vagrant** folder an deploy the cluster of Virtual Machines Cluster defined there. This cluster is already configued to test the playbooks defined in this repo.
 
-```bash
-ssh-keygen -q -t rsa -N '' -f /home/vagrant/.ssh/id_rsa <<<y >/dev/null 2>&1
-```
+### Use playbooks in another enviorment.
 
-Copy the ssh key to all the MUC.
-
-```bash
-ssh-copy-id -i /home/<local_username>/.ssh/id_rsa <remote_username>@<ip>
-```
-
-### Lets Play with the Playbooks
-
-* Deploy a Virtual Machines Cluster in your PC with Vagrant (They will be the Under Control Machines) [here](https://github.com/DonAurelio/vagrant).
 * Install Ansible in your PC (It will be the Control Machine)
 
 ```sh
@@ -47,44 +36,26 @@ sudo apt-get install ansible -y
 sudo apt-get install python -y
 ```
 
-* Tell Ansible how to communicate with each virtual machine.
+* Tell Ansible how to communicate with each machine
 
-The Ansible Invertiry File is the way we use to indicate Ansible hot to access remote machines. The inventory file located at */etc/ansible/hosts*.
+The Ansible Invertiry File is the way we use to indicate Ansible how to access remote machines. The inventory file is commonly located at */etc/ansible/hosts*.
 
 ```sh
 sudo nano /etc/ansible/hosts
 ```
 
-Ansible will use the privated keys provided by vagrant to access the cluster deployed with vagrant.
-
-```sh
-[vagrant_cluster]
-master ansible_host=127.0.0.1 ansible_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=/home/username/Desktop/vagrant/cluster/.vagrant/machines/master/virtualbox/private_key
-slave_1 ansible_host=127.0.0.1 ansible_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=/home/username/Desktop/vagrant/cluster/.vagrant/machines/slave_1/virtualbox/private_key
-slave_2 ansible_host=127.0.0.1 ansible_port=2201 ansible_user=vagrant ansible_ssh_private_key_file=/home/username/Desktop/vagrant/cluster/.vagrant/machines/slave_2/virtualbox/private_key
-```
-
-or
+Ansible will need to create a private key and copy this key to every Under Control Machine you need Ansible perform some instalation.
 
 ```sh
 [cluster]
 ss2023-00 ansible_host=127.0.0.1 ansible_port=22 ansible_user=vagrant ansible_ssh_private_key_file=/home/<username>/.ssh/private_key
 ```
 
-* Test if all machines are listening Ansible.
-
-```sh
-ansible -m ping vagrant_cluster
-```
-or
+* Test if Ansible is able to connect to each Under Control Machine.
 
 ```sh
 ansible -m ping cluster
 ```
-
-# Todo
-
-- [ ] Steps to configure a real cluster passwordless.
 
 # References
 
