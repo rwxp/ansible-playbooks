@@ -7,4 +7,4 @@
     - basic
     - slave
   vars_files:
-    - ./vars/common.yaml
+    - ./vars/common.yml
