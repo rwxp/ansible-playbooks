@@ -1,8 +1,9 @@
 - name: Setting up slave nodes
   # Target nodes
   hosts: 
-    - ss2023-00
-  user: cc
+    - ss2023-01
+    - ss2023-02
+  user: vagrant
   become: true
   roles: 
     - basic
@@ -14,13 +15,3 @@
     slurm_master_hostname: ss2023-00
     slurm_user_passwd: jlDmPv
     munge_user_passwd: jlDmPv
-    # All cluster nodes
-    # Used to update /etc/hosts
-    # Used to create slurm.conf file
-    cluster_hostnames:
-      - ss2023-00
-    # Comment if the master node will be used also as slave node.
-    # nfs_imports:
-    #   - { name: /home, src: 'ss2023-00:/home', type: nfs }
-    #   - { name: /etc/munge, src: 'ss2023-00:/etc/munge', type: nfs }
-    #   #- { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }

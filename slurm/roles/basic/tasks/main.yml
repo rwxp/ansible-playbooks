@@ -1,14 +1,3 @@
-- name: Set hostname
-  hostname:
-    name: "{{ inventory_hostname }}"
-
-- name: Update /etc/hosts
-  shell: "grep -qxF \"{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} {{ inventory_hostname }}\" /etc/hosts | echo \"{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} {{ inventory_hostname }}\" >> /etc/hosts "
-  with_items: "{{ cluster_hostnames }}"
-  register: cmdln
-  check_mode: no
-  tags: slave_only
-
 - name: Create munge group
   group:
     name: munge
@@ -57,8 +46,6 @@
   apt:
     pkg:
       - build-essential
-      - nfs-common
-      - nfs-kernel-server 
       - munge 
       - libmunge2 
       - libmunge-dev

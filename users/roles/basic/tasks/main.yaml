@@ -12,20 +12,6 @@
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
   when: inventory_hostname == master_hostname
 
-- name: Create users in slaves
-  user:
-    name: "{{ item }}"
-    password: "{{ users_passwd | password_hash('sha512') }}"
-    shell: /bin/bash 
-    system: no             
-    createhome: yes        
-    home: /home/{{ item }}
-    generate_ssh_key: yes
-    ssh_key_file: .ssh/id_rsa
-    state: "{{ users_state }}"
-  with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
-  when: inventory_hostname != master_hostname
-
 - name: Create authorized_keys file
   file:
     path: /home/{{ item }}/.ssh/authorized_keys
@@ -34,7 +20,21 @@
     mode: 0600
     state: touch
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
+  when: inventory_hostname == master_hostname
 
 - name: Place public key into authorized_keys
   shell: cat /home/{{ item }}/.ssh/id_rsa.pub >> /home/{{ item }}/.ssh/authorized_keys
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
+  when: inventory_hostname == master_hostname
+
+- name: Create users in slaves
+  user:
+    name: "{{ item }}"
+    password: "{{ users_passwd | password_hash('sha512') }}"
+    shell: /bin/bash 
+    system: no             
+    createhome: no        
+    home: /home/{{ item }}
+    state: "{{ users_state }}"
+  with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
+  when: inventory_hostname != master_hostname
