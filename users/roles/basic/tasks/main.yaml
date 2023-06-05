@@ -12,7 +12,6 @@
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
 
 - name: Create authorized_keys file
-  become_user: "{{ item }}"
   file:
     path: /home/{{ item }}/.ssh/authorized_keys
     owner: "{{ item }}"
