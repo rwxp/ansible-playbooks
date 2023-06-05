@@ -14,22 +14,22 @@ function setting_up_ssh_keys(){
   write_log "=> Setting up private and public ssh keys"
 
   # Checking if the mpi ssh key already exists
-  if [ -f '~/.ssh/id_rsa' ]
+  if [ -f "${HOME}/.ssh/id_rsa" ]
   then
     echo "You already have an ssh key"
     write_log "You already have an ssh key"
   else
-    echo "Creating a folder '~/.ssh/' to hold MPI SSH keys"
-    write_log "Creating a folder '~/.ssh/' to hold MPI SSH keys"
+    echo "Creating a folder '${HOME}/.ssh/' for SSH keys"
+    write_log "Creating a folder '${HOME}/.ssh/' for SSH keys"
 
     # Creating a folder to hold SSH keys
-    mkdir -p ~/.ssh/
+    mkdir -p "${HOME}/.ssh/"
 
     echo "Creating the private and public ssh keys"
     write_log "Creating the private and public ssh keys"
 
     # Creationg the public and private keys
-    ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
+    ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" <<<y >/dev/null 2>&1
   fi
   echo "Setting up private and public ssh keys finished succesfully"
   write_log "Setting up private and public ssh keys finished succesfully"
@@ -45,15 +45,15 @@ function share_ssh_public_key(){
   local host_password=$3
 
   # Checking if the mpi ssh key already exists
-  if [ -f "~/.ssh/id_rsa.pub" ]
+  if [ -f "${HOME}/.ssh/id_rsa" ]
   then
     echo "Sharing the public key with $host_username@$host_address"
     write_log "Sharing the public key with $host_address"
     # Sharing the public key with the remote slave
-    su -c "sshpass -p '$host_password' ssh-copy-id -i ~/.ssh/id_rsa $host_username@$host_address" ${host_username}
+    su -c "sshpass -p '$host_password' ssh-copy-id -i "${HOME}/.ssh/id_rsa" $host_username@$host_address" ${host_username}
   else
     echo "You dont have ssh keys to share." >&2
-    write_log "You dont have ssh keys to share, please use -set_ssh_keys first."
+    write_log "You dont have ssh keys to share."
   fi
 }
 
