@@ -50,7 +50,7 @@ function share_ssh_public_key(){
     echo "Sharing the public key with $host_username@$host_address"
     write_log "Sharing the public key with $host_address"
     # Sharing the public key with the remote slave
-    sshpass -p '$host_password' ssh-copy-id -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
+    sshpass -p "$host_password" ssh-copy-id -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
   else
     echo "You dont have ssh keys to share." >&2
     write_log "You dont have ssh keys to share."
