@@ -8,6 +8,8 @@
       - build-essential
       - openssh-server
       - sshpass
+      - nfs-common
+      - nfs-kernel-server 
     state: present
 
 - name: Disable known host checking in SSH
@@ -69,3 +71,30 @@
       - mpirun
       # "orted" is one of the helper executables that Open MPI uses to launch processes on remote nodes 
       - orted
+
+- name: Create MPI test directory
+  file: path="{{ mpi_test_dir }}" state=directory mode=0755
+
+- name: Download hello world example
+  get_url: 
+    url: https://www.open-mpi.org/papers/workshop-2006/hello.c
+    dest: "{{ mpi_test_dir }}/hello.c"
+
+- name: Compiling hellow world test ...
+  shell: mpicc {{ mpi_test_dir }}/hello.c -o {{ mpi_test_dir }}/hello
+
+- name: Running Hello world test ...
+  shell: mpirun {{ mpi_test_dir }}/hello
+  register: world
+  become: no
+
+- debug: msg="Hello world success!"
+  when: "'Hello, World, I am 0 of 1' in world.stdout_lines"
+
+# - name: Create /etc/hosts directory
+#   template:
+#     src: hosts.j2
+#     dest: /etc/hosts
+#     owner: root
+#     group: root
+#     mode: 0644
