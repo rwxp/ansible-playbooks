@@ -21,6 +21,5 @@
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
 
 - name: Place public key into authorized_keys
-  become_user: "{{ item }}"
   shell: cat /home/{{ item }}/.ssh/id_rsa.pub >> /home/{{ item }}/.ssh/authorized_keys
   with_sequence: start={{ users_seq_start }} end={{ users_seq_end }} format={{ users_seq_format }}
