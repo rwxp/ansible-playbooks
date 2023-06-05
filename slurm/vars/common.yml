@@ -4,7 +4,7 @@ slurm_cluster_name: galaxy.cluster
 # slurm_compute_mem: 187000
 # Vagrant
 slurm_compute_cpus: 2
-slurm_compute_mem: 2023
+slurm_compute_mem: 1975
 slurm_master_hostname: ss2023-00
 slurm_user_passwd: jlDmPv
 munge_user_passwd: jlDmPv
