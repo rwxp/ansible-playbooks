@@ -40,7 +40,7 @@ SlurmdDebug=info
 SlurmdLogFile=/var/log/slurm/slurmd.log
 #
 # COMPUTE NODES
-{% for hostname in cluster_hostnames %}
-NodeName={{ hostname }} CPUs={{ slurm_compute_cpus }} RealMemory={{ slurm_compute_mem }} State=UNKNOWN
+{% for item in cluster_hostnames %}
+NodeName={{ item.name }} CPUs={{ slurm_compute_cpus }} RealMemory={{ slurm_compute_mem }} State=UNKNOWN
 {% endfor %}
 PartitionName=local Nodes=ALL Default=YES MaxTime=INFINITE State=UP
