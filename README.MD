@@ -21,9 +21,9 @@ Ansible is an **Agentless** Configuration Management Tool commonly used to autom
 
 Passwordless (instructions below) is required between a Control Machine and Machines Under Configuration because Ansible use SSH to perform the configuration of these machines. Control and Under Configuration Machines require Python.
 
-### Use playbooks using Vagrant
+### Use playbooks with a Cluster of Virtual Machines
 
-* Get into the **vagrant** folder an deploy the cluster of Virtual Machines Cluster defined there. This cluster is already configued to test the playbooks defined in this repo.
+* Get into the **vagrant** folder an deploy the Virtual Machines Cluster defined there. This cluster is already configued to test the playbooks defined in this repo.
 
 ### Use playbooks in another enviorment.
 
@@ -64,6 +64,3 @@ ansible -m ping cluster
 - [Provisioning Vagrant multi-machines with Ansible](https://medium.com/@megawan/provisioning-vagrant-multi-machines-with-ansible-32e1809816c5)
 - [Ansible - A Beginner's Tutorial, Part 2
 ](https://www.youtube.com/watch?v=pRZA9ymZXn0)
-
-
-

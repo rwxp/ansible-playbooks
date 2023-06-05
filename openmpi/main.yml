@@ -8,7 +8,6 @@
   become: true
   roles: 
     - basic
-    - master
   vars:
     mpi_temp_dir: /tmp/openmpi
     mpi_inst_dir: /opt/openmpi-3.1.2

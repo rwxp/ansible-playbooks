@@ -1,4 +1,4 @@
-# JupyterHub Playbook
+# JupyterHub Ansible Playbook
 
 Deploy
 
