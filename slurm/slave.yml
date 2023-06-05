@@ -8,10 +8,5 @@
   roles: 
     - basic
     - slave
-  vars:
-    slurm_cluster_name: galaxy.cluster
-    slurm_compute_cpus: 48
-    slurm_compute_mem: 187000
-    slurm_master_hostname: ss2023-00
-    slurm_user_passwd: jlDmPv
-    munge_user_passwd: jlDmPv
+  vars_files:
+    - ./vars/common.yml

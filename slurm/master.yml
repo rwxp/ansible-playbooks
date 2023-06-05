@@ -7,14 +7,6 @@
   roles: 
     - basic
     - master
-  vars:
-    slurm_cluster_name: galaxy.cluster
-    # Chameleon Cloud
-    # slurm_compute_cpus: 48
-    # slurm_compute_mem: 187000
-    # Vagrant
-    slurm_compute_cpus: 2
-    slurm_compute_mem: 2023
-    slurm_master_hostname: ss2023-00
-    slurm_user_passwd: jlDmPv
-    munge_user_passwd: jlDmPv
+  vars_files:
+    - ./vars/common.yml
+

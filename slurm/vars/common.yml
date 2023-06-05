@@ -1,3 +1,13 @@
+slurm_cluster_name: galaxy.cluster
+# Chameleon Cloud
+# slurm_compute_cpus: 48
+# slurm_compute_mem: 187000
+# Vagrant
+slurm_compute_cpus: 2
+slurm_compute_mem: 2023
+slurm_master_hostname: ss2023-00
+slurm_user_passwd: jlDmPv
+munge_user_passwd: jlDmPv
 # All cluster nodes
 # Used to update /etc/hosts
 cluster_hostnames:
