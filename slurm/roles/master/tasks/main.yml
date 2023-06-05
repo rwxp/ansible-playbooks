@@ -20,3 +20,25 @@
 
 # - name: Reboot and wait for reboot to complete
 #   reboot:
+
+- name: Create munge key for authentication ...
+  command: /usr/sbin/mungekey -f
+
+- name: Grant the proper permissions to the munge /etc/munge/ folder
+  file: 
+    path: '/etc/munge/'
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
+
+- name: Make sure slurmctld service unit is running
+  service:
+    state: started
+    name: slurmctld
+
+- name: Make sure slurmd service unit is running
+  service:
+    state: started
+    name: slurmd
+  tags: slave_only
