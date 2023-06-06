@@ -1,0 +1,25 @@
+# Configuration file for jupyterhub.
+
+c = get_config()
+
+# Customized
+
+# The LocalAuthenticator is a special kind of Authenticator that has the ability
+# to manage users on the local system. When you try to add a new user to the Hub,
+# a LocalAuthenticator will check if the user already exists. If you set the
+# configuration value, create_system_users, to True in the configuration file,
+# the LocalAuthenticator has the ability to add users to the system. The setting
+# in the config file is:
+c.LocalAuthenticator.create_system_users = True
+
+# Each Authenticator may have different ways of determining whether a user is an
+# administrator. By default, JupyterHub uses the PAMAuthenticator which provides
+# the admin_groups option and can set administrator status based on a user group.
+# For example, we can let any user in the wheel group be an admin:
+c.PAMAuthenticator.admin_groups = { {{ jupyterhub_admin_groups }} }
+
+## The command used for starting the single-user server.
+c.Spawner.cmd = ['/opt/jupyterhub/bin/jupyterhub-singleuser']
+
+## The public facing URL of the whole JupyterHub application.
+c.JupyterHub.bind_url = 'http://0.0.0.0:8000'

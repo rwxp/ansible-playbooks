@@ -1,0 +1,19 @@
+---
+- name: Setting up users
+  # Target nodes
+  hosts:
+    - ss2023-00
+    - ss2023-01
+    - ss2023-02
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+  vars:
+    master_hostname: ss2023-00
+    users_seq_format: ss%d
+    users_seq_start: 1
+    users_seq_end: 12
+    # Delete with "absent"
+    users_state: present
+    users_passwd: ss2023

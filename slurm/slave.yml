@@ -1,33 +1,12 @@
 - name: Setting up slave nodes
+  # Target nodes
   hosts: 
-    - openmp-tutorial-1
-    - openmp-tutorial-2
-    - openmp-tutorial-3
-    - openmp-tutorial-4
-    - openmp-tutorial-5
-    - openmp-tutorial-6
-    - openmp-tutorial-7
-  user: cc
+    - ss2023-01
+    - ss2023-02
+  user: vagrant
   become: true
   roles: 
     - basic
     - slave
-  vars:
-    cluster_name: galaxy.cluster
-    master_node_hostname: openmp-tutorial-00
-    munge_user_passwd: jlDmPv
-    slurm_user_passwd: jlDmPv
-    # Hosts for slurm.conf file
-    hosts:
-      - { name: "openmp-tutorial-00", mem: 187000, cpus: 48, ip: 10.140.83.191 }
-      - { name: "openmp-tutorial-1", mem: 187000, cpus: 48, ip: 10.140.83.180 }
-      - { name: "openmp-tutorial-2", mem: 187000, cpus: 48, ip: 10.140.82.20 }
-      - { name: "openmp-tutorial-3", mem: 187000, cpus: 48, ip: 10.140.82.70 }
-      - { name: "openmp-tutorial-4", mem: 187000, cpus: 48, ip: 10.140.83.19 }
-      - { name: "openmp-tutorial-5", mem: 187000, cpus: 48, ip: 10.140.83.52 }
-      - { name: "openmp-tutorial-6", mem: 187000, cpus: 48, ip: 10.140.82.253 }
-      - { name: "openmp-tutorial-7", mem: 187000, cpus: 48, ip: 10.140.83.151 }
-    nfs_imports:
-      - { name: /home, src: 'openmp-tutorial-00:/home', type: nfs }
-      - { name: /etc/munge, src: 'openmp-tutorial-00:/etc/munge', type: nfs }
-      #- { name: /etc/slurm-llnl, src: 'galaxy-2:/etc/slurm-llnl', type: nfs }
+  vars_files:
+    - ./vars/common.yml

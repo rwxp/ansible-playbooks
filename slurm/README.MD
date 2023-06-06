@@ -11,3 +11,7 @@ Deploy computing nodes
 ```
 ansible-playbook slave.yml -K --tags slave_only
 ```
+
+### References
+
+1. [Munge Quick Start](https://github.com/dun/munge/blob/master/QUICKSTART)

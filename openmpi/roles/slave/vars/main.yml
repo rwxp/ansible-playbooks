@@ -1,2 +1,0 @@
-nfs_imports:
-  - { name: /home/mpiuser, src: 'm:/home/mpiuser', type: nfs }

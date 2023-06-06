@@ -1,0 +1,14 @@
+---
+- name: Setting up jupyterhub
+  # Target nodes
+  hosts:
+    - ss2023-00
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+  vars:
+    # Comma separed user groups with admin acces in jupyterhub.
+    # Example: "'wheel','vagrant'"
+    jupyterhub_admin_groups: "'vagrant'"
+

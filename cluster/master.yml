@@ -1,5 +1,4 @@
 - name: Setting up master node
-  # Target nodes
   hosts:
     - ss2023-00
   user: vagrant
@@ -9,4 +8,3 @@
     - master
   vars_files:
     - ./vars/common.yml
-

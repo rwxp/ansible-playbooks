@@ -8,8 +8,12 @@
       - build-essential
       - openssh-server
       - sshpass
-      - nfs-common
-      - nfs-kernel-server 
+      - libpmi0 
+      - libpmi0-dev 
+      - libpmi2-0 
+      - libpmi2-0-dev 
+      - libpmix-bin 
+      - libpmix2
     state: present
 
 - name: Disable known host checking in SSH
@@ -39,7 +43,7 @@
     copy: no
 
 - name: Running MPI ./configure (this can take a few seconds) ...
-  command: ./configure --prefix='{{ mpi_inst_dir }}'
+  command: ./configure --prefix='{{ mpi_inst_dir }}' --with-pmi --with-slurm
   # args to the command module 
   args:
     chdir: "{{ mpi_temp_dir }}/openmpi-3.1.2"
@@ -71,30 +75,3 @@
       - mpirun
       # "orted" is one of the helper executables that Open MPI uses to launch processes on remote nodes 
       - orted
-
-- name: Create MPI test directory
-  file: path="{{ mpi_test_dir }}" state=directory mode=0755
-
-- name: Download hello world example
-  get_url: 
-    url: https://www.open-mpi.org/papers/workshop-2006/hello.c
-    dest: "{{ mpi_test_dir }}/hello.c"
-
-- name: Compiling hellow world test ...
-  shell: mpicc {{ mpi_test_dir }}/hello.c -o {{ mpi_test_dir }}/hello
-
-- name: Running Hello world test ...
-  shell: mpirun {{ mpi_test_dir }}/hello
-  register: world
-  become: no
-
-- debug: msg="Hello world success!"
-  when: "'Hello, World, I am 0 of 1' in world.stdout_lines"
-
-# - name: Create /etc/hosts directory
-#   template:
-#     src: hosts.j2
-#     dest: /etc/hosts
-#     owner: root
-#     group: root
-#     mode: 0644

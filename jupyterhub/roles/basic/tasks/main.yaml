@@ -1,0 +1,54 @@
+- name: Update ubuntu
+  apt: update_cache=yes
+
+- name: Install prerequisites
+  apt:
+    pkg:
+      - python3.10-venv
+      - nodejs
+      - npm
+    state: present
+
+- name: Create virtualenv in /opt/jupyterhub/
+  command: python3 -m venv /opt/jupyterhub/
+
+- name: Ensure '/opt/jupyterhub/etc/jupyterhub/' dir exists
+  file: 
+    path: /opt/jupyterhub/etc/jupyterhub/
+    recurse: true
+    state: directory
+
+- name: Create /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+  template:
+    src: jupyterhub_config.py.j2
+    dest: /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+    mode: 0755
+
+- name: Install Jupyter Hub/Lab
+  command: /opt/jupyterhub/bin/python3 -m pip install wheel jupyterhub jupyterlab ipywidgets
+
+- name: Install configurable-http-proxy
+  command: npm install -g configurable-http-proxy
+
+- name: Ensure '/opt/jupyterhub/etc/systemd' dir exists
+  file: 
+    path: /opt/jupyterhub/etc/systemd
+    recurse: true
+    state: directory
+
+- name: Create jupyterhub.service
+  template:
+    src: jupyterhub.service.j2
+    dest: /opt/jupyterhub/etc/systemd/jupyterhub.service
+    mode: 0755
+
+- name: Install /opt/jupyterhub/etc/systemd/jupyterhub.service
+  file: 
+    src: /opt/jupyterhub/etc/systemd/jupyterhub.service
+    dest: /etc/systemd/system/jupyterhub.service
+    state: link
+
+- name: Make sure JupyterHub service unit is running
+  service:
+    state: started
+    name: jupyterhub.service

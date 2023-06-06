@@ -1,0 +1,15 @@
+---
+- name: Setting up master node
+  hosts:
+    - ss2023-00
+    - ss2023-01
+    - ss2023-02   
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+  vars:
+    mpi_temp_dir: /tmp/openmpi
+    mpi_inst_dir: /opt/openmpi-3.1.2
+    mpi_user_name: mpiuser
+    mpi_master_hostname: ss2023-00
