@@ -8,6 +8,12 @@
       - build-essential
       - openssh-server
       - sshpass
+      - libpmi0 
+      - libpmi0-dev 
+      - libpmi2-0 
+      - libpmi2-0-dev 
+      - libpmix-bin 
+      - libpmix2
     state: present
 
 - name: Disable known host checking in SSH
