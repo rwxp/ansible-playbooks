@@ -37,7 +37,7 @@
     copy: no
 
 - name: Running MPI ./configure (this can take a few seconds) ...
-  command: ./configure --prefix='{{ mpi_inst_dir }}'
+  command: ./configure --prefix='{{ mpi_inst_dir }}' --with-pmi --with-slurm
   # args to the command module 
   args:
     chdir: "{{ mpi_temp_dir }}/openmpi-3.1.2"
