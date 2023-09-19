@@ -1,0 +1,24 @@
+- name: Mount nfs directories
+  mount:
+    fstype: "{{ item.type }}"
+    name: "{{ item.name }}"
+    src: "{{ item.src }}"
+    state: mounted
+  with_items: "{{ nfs_imports }}"
+  tags: slave_only
+
+- name: Reboot and wait for reboot to complete
+  reboot:
+  tags: slave_only
+
+- name: Restart munge
+  service:
+    state: restarted
+    name: munge
+  tags: slave_only
+
+- name: Restart slurmd 
+  service:
+    state: restarted
+    name: slurmd
+  tags: slave_only
