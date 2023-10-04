@@ -1,3 +1,3 @@
 #!/bin/bash 
 cd "/vagrant"
-cat "id_rsa.pub" > "${HOME}/.ssh/authorized_keys"
+cat "id_rsa.pub" >> "/home/vagrant/.ssh/authorized_keys"

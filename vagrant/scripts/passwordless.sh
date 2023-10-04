@@ -14,22 +14,24 @@ function setting_up_ssh_keys(){
   write_log "=> Setting up private and public ssh keys"
 
   # Checking if the mpi ssh key already exists
-  if [ -f "${HOME}/.ssh/id_rsa" ]
+  if [ -f "/home/vagrant/.ssh/id_rsa" ]
   then
     echo "You already have an ssh key"
     write_log "You already have an ssh key"
   else
-    echo "Creating a folder '${HOME}/.ssh/' for SSH keys"
-    write_log "Creating a folder '${HOME}/.ssh/' for SSH keys"
+    echo "Creating a folder '/vagrant/home/.ssh/' for SSH keys"
+    write_log "Creating a folder '/vagrant/home/.ssh/' for SSH keys"
 
     # Creating a folder to hold SSH keys
-    mkdir -p "${HOME}/.ssh/"
+    mkdir -p "/home/vagrant/.ssh/"
 
     echo "Creating the private and public ssh keys"
     write_log "Creating the private and public ssh keys"
 
     # Creationg the public and private keys
-    ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" <<<y >/dev/null 2>&1
+    sudo su vagrant
+    ssh-keygen -q -t rsa -N '' -f "/home/vagrant/.ssh/id_rsa" <<<y >/dev/null 2>&1
+    cat /home/vagrant/.ssh/id_rsa.pub >>  /home/vagrant/.ssh/authorized_keys
   fi
   echo "Setting up private and public ssh keys finished succesfully"
   write_log "Setting up private and public ssh keys finished succesfully"
@@ -41,14 +43,12 @@ function share_ssh_public_key(){
   write_log "=> Share public ssh key"
 
   # Checking if the mpi ssh key already exists
-  if [ -f "${HOME}/.ssh/id_rsa" ]
+  if [ -f "/home/vagrant/.ssh/id_rsa" ]
   then
     echo "Sharing the public key"
     write_log "Sharing the public key"
     # Sharing the public key with the remote slave
-    cd "${HOME}/.ssh/"
-    cp id_rsa.pub "/vagrant"
-    cat "id_rsa.pub" > "${HOME}/.ssh/authorized_keys"
+    cp "/home/vagrant/.ssh/id_rsa.pub" "/vagrant"
   else
     echo "You dont have ssh keys to share." >&2
     write_log "You dont have ssh keys to share."
