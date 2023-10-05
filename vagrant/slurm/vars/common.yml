@@ -1,0 +1,28 @@
+slurm_cluster_name: galaxy.cluster
+# Chameleon Cloud
+# slurm_compute_cpus: 48
+# slurm_compute_mem: 187000
+# Vagrant
+slurm_compute_cpus: 2
+slurm_compute_mem: 1975
+slurm_master_hostname: ss2023-00
+slurm_user_passwd: jlDmPv
+munge_user_passwd: jlDmPv
+# All cluster nodes
+# Used to update /etc/hosts
+cluster_hostnames:
+  - { name: ss2023-00, ip: '10.0.0.2' }
+  - { name: ss2023-01, ip: '10.0.0.3' }
+  - { name: ss2023-02, ip: '10.0.0.4' }
+nfs_exports:
+  # users accounts
+  - /home *(rw,sync,no_root_squash,no_subtree_check)
+  # munge authentication keys
+  - /etc/munge *(rw,sync,no_root_squash,no_subtree_check)
+  # for slurm.confg and gres.conf files 
+  - /etc/slurm *(rw,sync,no_root_squash,no_subtree_check)
+# Comment if the master node will be used also as slave node.
+nfs_imports:
+  - { name: /home, src: 'ss2023-00:/home', type: nfs }
+  - { name: /etc/munge, src: 'ss2023-00:/etc/munge', type: nfs }
+  - { name: /etc/slurm, src: 'ss2023-00:/etc/slurm', type: nfs }

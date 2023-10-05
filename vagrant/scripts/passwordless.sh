@@ -30,6 +30,7 @@ function setting_up_ssh_keys(){
 
     # Creationg the public and private keys
     ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" <<<y >/dev/null 2>&1
+    cat "${HOME}/.ssh/id_rsa.pub" >> "${HOME}/.ssh/authorized_keys"
   fi
   echo "Setting up private and public ssh keys finished succesfully"
   write_log "Setting up private and public ssh keys finished succesfully"
