@@ -55,6 +55,23 @@ function share_ssh_public_key(){
   fi
 }
 
+function add_known_host(){
+  local host=$1
+
+  echo "=> Adding hosts to known_hosts file"
+  write_log "=> Adding hosts to known_hosts file"
+
+  ssh-keyscan -H "${host}" >> "${HOME}/.ssh/known_hosts"
+  echo "Added ${host} to known_hosts"
+  write_log "Added ${host} to known_hosts"
+
+  echo "Adding hosts to known_hosts file finished successfully"
+  write_log "Adding hosts to known_hosts file finished successfully"
+}
+
 # MAIN
 setting_up_ssh_keys 'vagrant'
 share_ssh_public_key
+add_known_host '10.0.0.2'
+add_known_host '10.0.0.3'
+add_known_host '10.0.0.4'
