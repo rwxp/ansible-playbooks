@@ -40,19 +40,14 @@ function share_ssh_public_key(){
   echo "=> Share public ssh key"
   write_log "=> Share public ssh key"
 
-  local host_username=$1
-  local host_address=$2
-  local host_password=$3
-
-  echo "host_username: $host_username, host_address: $host_address, host_password: $host_password"
-
   # Checking if the mpi ssh key already exists
   if [ -f "${HOME}/.ssh/id_rsa" ]
   then
-    echo "Sharing the public key with $host_username@$host_address"
-    write_log "Sharing the public key with $host_address"
+    echo "Sharing the public key"
+    write_log "Sharing the public key"
     # Sharing the public key with the remote slave
-    sshpass -p "$host_password" ssh-copy-id -f -o StrictHostKeyChecking=no -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
+    cp "${HOME}/.ssh/id_rsa.pub" "/vagrant/"
+
   else
     echo "You dont have ssh keys to share." >&2
     write_log "You dont have ssh keys to share."
@@ -61,6 +56,4 @@ function share_ssh_public_key(){
 
 # MAIN
 setting_up_ssh_keys 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.2' 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.3' 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.4' 'vagrant'
+share_ssh_public_key
