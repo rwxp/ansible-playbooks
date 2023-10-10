@@ -4,9 +4,8 @@
     - ss2023-00
   user: vagrant
   become: true
-  roles: 
+  roles:
     - basic
     - master
   vars_files:
     - ./vars/common.yml
-

@@ -30,7 +30,6 @@ function setting_up_ssh_keys(){
 
     # Creationg the public and private keys
     ssh-keygen -q -t rsa -N '' -f "${HOME}/.ssh/id_rsa" <<<y >/dev/null 2>&1
-    cat "${HOME}/.ssh/id_rsa.pub" >> "${HOME}/.ssh/authorized_keys"
   fi
   echo "Setting up private and public ssh keys finished succesfully"
   write_log "Setting up private and public ssh keys finished succesfully"
@@ -41,37 +40,29 @@ function share_ssh_public_key(){
   echo "=> Share public ssh key"
   write_log "=> Share public ssh key"
 
+  local host_username=$1
+  local host_address=$2
+  local host_password=$3
+
+  echo "host_username: $host_username, host_address: $host_address, host_password: $host_password"
+
   # Checking if the mpi ssh key already exists
   if [ -f "${HOME}/.ssh/id_rsa" ]
   then
-    echo "Sharing the public key"
-    write_log "Sharing the public key"
+    echo "Sharing the public key with $host_username@$host_address"
+    write_log "Sharing the public key with $host_address"
     # Sharing the public key with the remote slave
-    cp "${HOME}/.ssh/id_rsa.pub" "/vagrant/"
-
+    sshpass -p "$host_password" ssh-copy-id -f -o StrictHostKeyChecking=no -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
   else
     echo "You dont have ssh keys to share." >&2
     write_log "You dont have ssh keys to share."
   fi
 }
 
-function add_known_host(){
-  local host=$1
-
-  echo "=> Adding hosts to known_hosts file"
-  write_log "=> Adding hosts to known_hosts file"
-
-  ssh-keyscan -H "${host}" >> "${HOME}/.ssh/known_hosts"
-  echo "Added ${host} to known_hosts"
-  write_log "Added ${host} to known_hosts"
-
-  echo "Adding hosts to known_hosts file finished successfully"
-  write_log "Adding hosts to known_hosts file finished successfully"
-}
-
 # MAIN
 setting_up_ssh_keys 'vagrant'
-share_ssh_public_key
-add_known_host '10.0.0.2'
-add_known_host '10.0.0.3'
-add_known_host '10.0.0.4'
+share_ssh_public_key 'vagrant' '10.0.0.2' 'vagrant'
+share_ssh_public_key 'vagrant' '10.0.0.3' 'vagrant'
+share_ssh_public_key 'vagrant' '10.0.0.4' 'vagrant'
+
+ansible-playbook '/vagrant/slurm/master.yml'
