@@ -1,0 +1,88 @@
+- name: Create munge group
+  group:
+    name: munge
+    state: present
+    gid: 3456
+
+- name: Create munge user
+  user:
+    name: "munge"
+    uid: 3456
+    group: munge
+    password: "{{ munge_user_passwd | password_hash('sha512') }}"
+    state: present
+    shell: /sbin/nologin       
+    system: no             
+    createhome: yes        
+    home: /var/lib/munge
+
+- name: Create slurm group
+  group:
+    name: slurm
+    state: present
+    gid: 3457
+
+- name: Create slurm user
+  user:
+    name: "slurm"
+    uid: 3457
+    group: slurm
+    password: "{{ slurm_user_passwd | password_hash('sha512') }}"
+    state: present
+    shell: /bin/bash       
+    system: no             
+    createhome: yes        
+    home: /var/lib/slurm
+
+- name: Update ubuntu
+  apt: update_cache=yes
+
+- name: Install nfs and munge packages
+  apt:
+    pkg:
+      - build-essential
+      - munge 
+      - libmunge2 
+      - libmunge-dev
+    state: present
+
+- name: Grant the proper permissions to the munge /var/log/munge/ folder
+  file: 
+    path: /var/log/munge/
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
+
+- name: Grant the proper permissions to the munge /var/lib/munge/ folder
+  file: 
+    path: '/var/lib/munge/'
+    owner: munge
+    group: munge
+    mode: 0700
+    recurse: yes
+
+- name: Grant the proper permissions to the munge /run/munge/ folder
+  file:
+    path: /run/munge/
+    owner: munge
+    group: munge
+    mode: 0755
+    recurse: yes
+
+- name: Make sure munge service unit is running
+  service:
+    state: started
+    name: munge
+
+- name: Install slurmctld and slurmd packages
+  apt:
+    pkg:
+      - slurm-wlm
+    state: present
+
+- name: Create /etc/slurm/slurm.conf
+  template:
+    src: slurm.conf.j2
+    dest: /etc/slurm/slurm.conf
+    mode: 0755

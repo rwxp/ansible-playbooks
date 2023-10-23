@@ -64,3 +64,5 @@ setting_up_ssh_keys 'vagrant'
 share_ssh_public_key 'vagrant' '10.0.0.2' 'vagrant'
 share_ssh_public_key 'vagrant' '10.0.0.3' 'vagrant'
 share_ssh_public_key 'vagrant' '10.0.0.4' 'vagrant'
+
+ansible-playbook '/vagrant/slurm/master.yml'
