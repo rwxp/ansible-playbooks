@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ips=($(cat "$(dirname "$0")/config_ips"))
+
 function write_log(){
   local text=$1
   echo $text >> passwordless.log 
