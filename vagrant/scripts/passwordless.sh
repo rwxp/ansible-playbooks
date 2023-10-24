@@ -1,9 +1,27 @@
 #!/bin/bash
 
+cd /vagrant/vars
+ips_file="ips.txt"
+
 function write_log(){
   local text=$1
   echo $text >> passwordless.log 
 }
+
+function read_ips_from_file() {
+  if [ ! -f "$ips_file" ]; then
+      echo "Error: IPs file not found: $ips_file"
+      write_log "Error: IPs file not found: $ips_file"
+      exit 1
+  fi
+  local file=$1
+  local ips=()
+  while IFS= read -r line; do
+    ips+=("$line")
+  done < "$file"
+  echo "${ips[@]}"
+}
+ips=($(read_ips_from_file "$ips_file"))
 
 # Create a private and public ssk keys
 function setting_up_ssh_keys(){
@@ -37,32 +55,33 @@ function setting_up_ssh_keys(){
 
 # Send the public ssh key to a slave node
 function share_ssh_public_key(){
-  echo "=> Share public ssh key"
-  write_log "=> Share public ssh key"
+  local ips=("$@")
+  for ip in "${ips[@]}"; do
+    echo "=> Share public ssh key"
+    write_log "=> Share public ssh key"
+    echo "La ip es la siguiente: $ip"
 
-  local host_username=$1
-  local host_address=$2
-  local host_password=$3
+    local host_username='vagrant'
+    local host_address=$ip
+    local host_password='vagrant'
 
-  echo "host_username: $host_username, host_address: $host_address, host_password: $host_password"
+    echo "host_username: $host_username, host_address: $host_address, host_password: $host_password"
 
-  # Checking if the mpi ssh key already exists
-  if [ -f "${HOME}/.ssh/id_rsa" ]
-  then
-    echo "Sharing the public key with $host_username@$host_address"
-    write_log "Sharing the public key with $host_address"
-    # Sharing the public key with the remote slave
-    sshpass -p "$host_password" ssh-copy-id -f -o StrictHostKeyChecking=no -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
-  else
-    echo "You dont have ssh keys to share." >&2
-    write_log "You dont have ssh keys to share."
+    # Checking if the mpi ssh key already exists
+    if [ -f "${HOME}/.ssh/id_rsa" ]
+    then
+      echo "Sharing the public key with $host_username@$host_address"
+      write_log "Sharing the public key with $host_address"
+      # Sharing the public key with the remote slave
+      sshpass -p "$host_password" ssh-copy-id -f -o StrictHostKeyChecking=no -i "${HOME}/.ssh/id_rsa" "$host_username@$host_address"
+    else
+      echo "You dont have ssh keys to share." >&2
+      write_log "You dont have ssh keys to share."
   fi
+  done
 }
 
 # MAIN
 setting_up_ssh_keys 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.2' 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.3' 'vagrant'
-share_ssh_public_key 'vagrant' '10.0.0.4' 'vagrant'
-
-ansible-playbook '/vagrant/slurm/master.yml'
+share_ssh_public_key "${ips[@]}"
+ansible-playbook /vagrant/slurm/master.yml  
