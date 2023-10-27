@@ -1,6 +1,7 @@
 #!/bin/bash
-sudo apt-get update
+
 # Install Ansible
+sudo apt-get update
 sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get install ansible -y
 
