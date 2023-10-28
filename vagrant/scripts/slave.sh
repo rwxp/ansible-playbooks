@@ -1,1 +1,0 @@
-cat "/vagrant/id_rsa.pub" >> "${HOME}/.ssh/authorized_keys"
