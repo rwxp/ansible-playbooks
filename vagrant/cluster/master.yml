@@ -1,0 +1,10 @@
+- name: Setting up master node
+  hosts:
+    - ss2023-00
+  user: vagrant
+  become: true
+  roles: 
+    - basic
+    - master
+  vars_files:
+    - ./vars/common.yml

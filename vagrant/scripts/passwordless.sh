@@ -84,4 +84,3 @@ function share_ssh_public_key(){
 # MAIN
 setting_up_ssh_keys 'vagrant'
 share_ssh_public_key "${ips[@]}"
-ansible-playbook /vagrant/slurm/master.yml  
