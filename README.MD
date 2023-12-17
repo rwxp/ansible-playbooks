@@ -57,6 +57,32 @@ ss2023-00 ansible_host=127.0.0.1 ansible_port=22 ansible_user=vagrant ansible_ss
 ansible -m ping cluster
 ```
 
+
+# Automatic provisioning
+* To initiate automatic provisioning the first step is to create an IP list (ips.txt) within the Vagrant vars folder.
+
+```
+nano vagrant/vars/ips.txt 
+```
+IP list (ips.txt) should follow the next model:
+**IP File Model:**
+```
+- [Master Node IP]
+- [Node 1 IP]
+- [Node 2 IP]
+- ...
+- [Node N IP]
+```
+* To execute the interactive menu and select the desired Ansible playbook, run the following Vagrant command:
+```
+vagrant up
+```
+This command will initiate the provisioning process and prompt you to choose the Ansible playbook you want to apply, input the number of the desired playbook and press Enter to continue.
+
+Each ip specified in IP file will create a private network, which allows host-only access to the machine
+using a specific IP.
+Once the machines are up the bash scripts are executed to enable the SSH passwordless connection to guarantee the execution of the selected playbook.
+
 # References
 
 - [How to install Ansible on Ubuntu Server 18.04](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)
@@ -64,3 +90,7 @@ ansible -m ping cluster
 - [Provisioning Vagrant multi-machines with Ansible](https://medium.com/@megawan/provisioning-vagrant-multi-machines-with-ansible-32e1809816c5)
 - [Ansible - A Beginner's Tutorial, Part 2
 ](https://www.youtube.com/watch?v=pRZA9ymZXn0)
+
+
+
+
