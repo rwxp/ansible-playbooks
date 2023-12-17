@@ -83,6 +83,8 @@ Each ip specified in IP file will create a private network, which allows host-on
 using a specific IP.
 Once the machines are up the bash scripts are executed to enable the SSH passwordless connection to guarantee the execution of the selected playbook.
 
+As soon as SSH passwordless access is ensured, and the machines are operational, Ansible playbooks can be effortlessly executed within the cluster.
+
 # References
 
 - [How to install Ansible on Ubuntu Server 18.04](https://www.techrepublic.com/article/how-to-install-ansible-on-ubuntu-server-18-04/)
